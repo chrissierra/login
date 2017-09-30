@@ -1,0 +1,19 @@
+{
+  "name": "hola-hola",
+  "description": "ja",
+  "main": "hola-hola.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "paper-ripple": "PolymerElements/paper-ripple#^2.0.1",
+    "notification-toast": "jifalops/notification-toast#^0.2.0",
+    "app-toast": "jifalops/app-toast#^0.3.1"
+  },
+  "devDependencies": {
+    "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  },
+  "resolutions": {
+    "polymer": "^2.0.0"
+  }
+}

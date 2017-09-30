@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Material Design Login Form</title>
+  
+  
+  
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAWIc20EP_h1ALQmNYiUmyn-SF5q30zm90",
+    authDomain: "watchtower-48dac.firebaseapp.com",
+    databaseURL: "https://watchtower-48dac.firebaseio.com",
+    projectId: "watchtower-48dac",
+    storageBucket: "watchtower-48dac.appspot.com",
+    messagingSenderId: "880783848352"
+  };
+  firebase.initializeApp(config);
+  const messaging= firebase.messaging();
+  messaging.requestPermission()
+  .then(function(){
+    console.log("have permission");
+    toast.text="Autorizaste entrega de notificaciones";
+    toast.show();
+    return messaging.getToken();
+  })
+  .then(function(token){
+
+    localStorage.setItem("token", token);
+    
+  })
+  .catch(function(err){
+    console.log("error")
+  })
+</script>
+<body>
+  <!--Google Font - Work Sans-->
+<link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,700' rel='stylesheet' type='text/css'>
+<link rel="import" href="./bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="./bower_components/polymer/polymer-element.html">
+<link rel="import" href="./bower_components/app-toast/app-toast.html">
+<div class="container">
+    <app-toast id="toast"></app-toast>
+  <div class="profile">
+    <button class="profile__avatar" id="toggleProfile">
+     <img src="https://scontent.fscl4-1.fna.fbcdn.net/v/t1.0-9/21740350_10213986717205862_9177288238437439476_n.jpg?oh=0a4c7b8272a042427980fe7ae5bd44d8&oe=5A428C55" alt="Avatar" /> 
+    </button>
+    <div class="profile__form">
+      <div class="profile__fields">
+        <div class="field">
+          <input type="text" id="nombre" class="input" required pattern=.*\S.* />
+          <label for="nombre" class="label">Nombre</label>
+        </div>
+        <div class="field">
+          <input type="password" id="rut" class="input" required pattern=.*\S.* />
+          <label for="rut" class="label">Rut</label>
+        </div>
+        <div class="profile__footer">
+           <div class="button raised blue">
+            <div class="center" id="boton" fit>LOGIN</div>
+            <paper-ripple fit></paper-ripple>
+          </div>
+        </div>
+      </div>
+     </div>
+  </div>
+</div>
+  
+
+<style is="custom-style">
+    app-toast.styled {
+      --app-toast: {
+        color: red;
+        background-color: #888;
+      };
+      --app-toast-button: {
+        color: blue;
+      };
+      --app-toast-main-icon: {
+        color: green;
+      };
+      --app-toast-main-icon-stroke-color: orange;
+      --app-toast-cancel-icon: {
+        color: purple;
+      };
+    }
+  </style>
+<script>
+ var boton= document.getElementById("boton");
+ 
+
+ boton.addEventListener("click", function(){
+
+ var nombre=document.getElementById("nombre").value;
+ var rut=document.getElementById("rut").value;
+
+  var path="http://christophersierra.ddns.net/notificaciones.php";
+    fetch(path,{
+    method: "POST",
+    //what ever data you want to post with key value pair 
+    body: "ingreso=ingreso&nombre="+nombre+"&rut="+rut+"&token="+localStorage.getItem("token"),
+    headers: {
+    "Content-Type": "application/x-www-form-urlencoded"
+    }})
+    .then( (response) => { 
+
+        return response.text();
+
+
+    //do something awesome that makes the world a better place
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ toast.text="Te registraste exitosamente";
+ toast.actionText = "ACTION";
+ toast.showCancel = true;
+ toast.fitBottom = true;
+ toast.show();
+setTimeout(function() {
+  window.close();
+}, 300);
+}, false)
+
+
+</script>
+
+    <script  src="js/index.js"></script>
+
+</body>
+</html>
