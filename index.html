@@ -11,6 +11,8 @@
   
 </head>
 <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+
+
 <script>
   // Initialize Firebase
   var config = {
@@ -23,23 +25,39 @@
   };
   firebase.initializeApp(config);
   const messaging= firebase.messaging();
+
+
   messaging.requestPermission()
   .then(function(){
-    console.log("have permission");
-    toast.text="Autorizaste entrega de notificaciones";
-    toast.show();
+   console.log("permiso entregado")
     return messaging.getToken();
   })
   .then(function(token){
-
+   
     localStorage.setItem("token", token);
-    
+    console.log(token)
   })
   .catch(function(err){
     console.log("error")
   })
+
+
+  if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+      // Registration was successful
+      console.log('ServiceWorker registration successful with scope: ', registration.scope);
+    }).catch(function(err) {
+      // registration failed :(
+      console.log('ServiceWorker registration failed: ', err);
+    });
+  });
+}
+
 </script>
 <body>
+
+
   <!--Google Font - Work Sans-->
 <link href='https://fonts.googleapis.com/css?family=Work+Sans:400,300,700' rel='stylesheet' type='text/css'>
 <link rel="import" href="./bower_components/paper-ripple/paper-ripple.html">
