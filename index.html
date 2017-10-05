@@ -44,6 +44,7 @@
 
   if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
+   (alert(localStorage.getItem("token"));
     navigator.serviceWorker.register('/sw.js').then(function(registration) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
@@ -119,6 +120,7 @@
  var rut=document.getElementById("rut").value;
 
   var path="https://coseismal-hamster-7732.dataplicity.io/notificaciones.php";
+   alert(localStorage.getItem("token"));
     fetch(path,{
     method: "POST",
     //what ever data you want to post with key value pair 
